@@ -5,6 +5,7 @@ using UnityEngine;
 using EFT;
 using System.IO;
 using System.Runtime.InteropServices;
+using EFT.Interactive;
 
 // Released by TheWWorld on UnknowCheats
 // I think the godmode cause my ban or maybe i was reported for for weird killings
@@ -115,7 +116,7 @@ namespace Absolutly
                         player.Skills.MagDrillsUnloadSpeed.Value = 2f;
                         player.Weapon.Template.isFastReload = true;
                         player.ProceduralWeaponAnimation.Shootingg.Intensity = 0;
-                        player.ProceduralWeaponAnimation.Shootingg.RecoilStrengthXY = new Vector2(0, 0);
+                        player.ProceduralWeaponAnimation.Shootingg.RecoilStrengthXy = new Vector2(0, 0);
                         player.ProceduralWeaponAnimation.Shootingg.RecoilStrengthZ = new Vector2(0, 0);
                     }
                 }
@@ -180,7 +181,7 @@ namespace Absolutly
 
                         var playerColor = GetPlayerColor(player.Side);
                         var isAi = player.Profile.Info.RegistrationDate <= 0;
-                        var deadcolor = player.Profile.Health.IsAlive ? playerColor : Color.gray;
+                        var deadcolor = player.HealthController.IsAlive ? playerColor : Color.gray;
 
 
 
@@ -191,8 +192,8 @@ namespace Absolutly
 
 
                         var playerName = isAi ? "AI" : player.Profile.Info.Nickname;
-                        float playerHealth = player.HealthController.SummaryHealth.CurrentValue / 435f * 100f;
-                        string playerDisplayName = player.Profile.Health.IsAlive ? playerName : playerName + " (Dead)";
+                        float playerHealth = 0f; //ToDo need another way player.HealthController.SummaryHealth.CurrentValue / 435f * 100f;
+                        string playerDisplayName = player.HealthController.IsAlive ? playerName : playerName + " (Dead)";
                         string playerText = $"[{(int)playerHealth}%] {playerDisplayName} [{(int)distanceToObject}m]";
 
                         var playerTextVector = GUI.skin.GetStyle(playerText).CalcSize(new GUIContent(playerText));
